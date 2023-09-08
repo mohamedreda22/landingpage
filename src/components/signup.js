@@ -3,7 +3,7 @@ import "../styles/signup.css";
 import React, { useState } from "react";
 import facebookicon from "../assets/facebookicon.png";
 import gmailicon from "../assets/gmailicon.png";
-
+import { Link } from "react-router-dom";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({
@@ -68,7 +68,7 @@ setFormData({
           value={formData.password}
           onChange={handleChange}
         />
-        <h4 style={{ color: "gray" }}>Or Sign up with </h4>
+        <h4 >Or Sign up with </h4>
         <div className="social-container">
           <a href="/" className="social">
             <img src={facebookicon} alt="facebook" />
@@ -78,11 +78,12 @@ setFormData({
           </a>
         </div>
         <div>
-          <button type="submit">Sign Up</button>
+          <button  type="submit">Sign Up</button>
         </div>
         <div>
           <h4>
-            Have one? .... <a href="/signin">Sign In</a>
+            Have one? .... 
+            <Link to="/signin">Sign In</Link>
           </h4>
         </div>
       </form>

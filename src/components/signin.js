@@ -4,6 +4,7 @@ import React from "react";
 import facebookicon from "../assets/facebookicon.png";
 import gmailicon from "../assets/gmailicon.png";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 export default function SignIn() {
   const [formData, setFormData] = useState({
     email: "",
@@ -48,7 +49,7 @@ setFormData({
 
         <div>
           <input  
-          type="email"
+          type="username"
           id="email"
           name="email"
           placeholder="Username"
@@ -68,7 +69,9 @@ setFormData({
           <button type="submit">Sign In</button>
         </div>
         <div>
-            <h4>New one ?  .... <a href="/signup" target="">Sign Up</a></h4>
+            <h4>New one ?  .... 
+              <Link  to="/signup">Sign Up</Link>
+              </h4>
     
         </div>
       </form>
