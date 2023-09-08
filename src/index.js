@@ -8,7 +8,7 @@ import App from './App';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  <RouterProvider router={router}>
+  <RouterProvider router={router} >
     <Router>
       <App />
     </Router>
