@@ -1,0 +1,119 @@
+.container {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    height: 100vh;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    
+    
+  }
+  
+  .img {
+    max-width: 35%; 
+    margin-right: 20px; 
+    padding-right: 100px;
+    
+  }
+  
+  h1 {
+    font-size: 35px;
+    color: #000000;
+    font-weight: bold;
+    padding-top: -10px;
+    margin-bottom: 100px;
+  }
+
+  
+  form {
+    width: 50%; 
+  }
+
+  input {
+    width: 25%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 2px solid #000000; 
+    text-align: left;
+    font-size: 15px;
+    font-weight: bold;
+    margin-right: 20px;
+
+  }
+  
+
+  
+  button {
+    padding: 2% 4% 2% 4%;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: bold;
+    width: 28%;
+  }
+
+.icon {
+    position: absolute;
+    top: 50%;
+    left: 3px; 
+    transform: translateY(-50%);
+    pointer-events: none; 
+    z-index: 1; 
+}
+input[type="text"] {
+  padding: 7px;
+  background-image: url('../assets/usernameicon1.png');
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  padding-left: 85px;
+  position: relative;
+  left: -58px;
+    
+}    
+
+input[type="email"] {
+  padding: 7px;
+  border: 0.5px 0px 0px 0px outset #000000;
+  background-image: url('../assets/emailicon.jpg');
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  text-indent: 35px; 
+}
+
+input[type="password"] {
+  padding: 7px;
+  border: 0.5px 0px 0px 0px outset #000000;
+  background-image: url('../assets/passwordicon1.png');
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  text-indent: 35px; 
+}
+
+ 
+    a{
+        text-decoration: none;
+        font-size: 20px;
+    }
+.social-container img{
+    max-width: 25px;
+    max-height: 25px;
+    size-adjust: 20px;
+    margin: -1px 10px 1px;
+    }
+
+      
+      
+      
+      
+      
+      
