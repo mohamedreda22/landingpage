@@ -1,0 +1,111 @@
+
+{
+    "name": "Auth",
+    "item": [
+        {
+            "name": "login",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "email",
+                            "value": "modernhomeinegypt@gmail.com",
+                            "type": "default"
+                        },
+                        {
+                            "key": "password",
+                            "value": "ModernHome",
+                            "type": "default"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "localhost:9090/moaaz/api/modernhome/auth/login",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "9090",
+                    "path": [
+                        "moaaz",
+                        "api",
+                        "modernhome",
+                        "auth",
+                        "login"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "forgetPassword",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "email",
+                            "value": "moaazsuliman1@gmail.com",
+                            "type": "default"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "localhost:9090/moaaz/api/modernhome/auth/forgetPassword",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "9090",
+                    "path": [
+                        "moaaz",
+                        "api",
+                        "modernhome",
+                        "auth",
+                        "forgetPassword"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ]
+},
+{
+    "name": "User",
+    "item": [
+        {
+            "name": "register",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \r\n    \"name\":\"Moaaz\",\r\n    \"email\":\"moaazsuliman1@gmail.com\",\r\n    \"address\":\"Cairo Elmarg\",\r\n    \"phone1\":\"01211074252\",\r\n    \"password\":\"moaaz\"\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "localhost:9090/moaaz/api/modernhome/users/register",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "9090",
+                    "path": [
+                        "moaaz",
+                        "api",
+                        "modernhome",
+                        "users",
+                        "register"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ]
+}

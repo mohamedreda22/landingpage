@@ -12,23 +12,38 @@ export default function SignIn() {
     password: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
  if (!formData.username || !formData.email || !formData.password) {
       alert("Please fill in all fields before signing up.");
       return;
     }
-    else{
-      alert("You have successfully signed up.");
-      console.log("Form data submitted:", formData);
-setFormData({
-        username: "",
-        email: "",
-        password: "",
-      });       
+    try {
+      const response = await fetch('/api/signup', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        alert("Sign-up successful");
+        console.log("Form data submitted:", formData);
+        setFormData({
+          email: "",
+          password: "",
+        });
+      } else {
+        alert("Invalid email or password. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred. Please try again later.");
     }
-    };
+  };
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
