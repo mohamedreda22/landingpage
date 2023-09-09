@@ -20,7 +20,7 @@ export default function SignIn() {
     }
 
     try {
-      const response = await fetch('/api/signin', {
+      const response = await fetch('localhost:9090/moaaz/api/modernhome/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,6 +35,7 @@ export default function SignIn() {
           email: "",
           password: "",
         });
+        return response.json();
       } else {
         alert("Invalid email or password. Please try again.");
       }
@@ -68,7 +69,7 @@ export default function SignIn() {
 
         <div>
           <input  
-          type="username"
+          type="email"
           id="email"
           name="email"
           placeholder="Username"

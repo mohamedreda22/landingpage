@@ -20,7 +20,7 @@ export default function SignIn() {
       return;
     }
     try {
-      const response = await fetch('/api/signup', {
+      const response = await fetch('localhost:9090/moaaz/api/modernhome/users/register', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
