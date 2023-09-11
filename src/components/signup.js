@@ -21,6 +21,10 @@ export default function SignUp() {
     if (!formData.username || !formData.email || !formData.password) {
       setErrorMessage("Please fill in all fields before signing up."); 
             return;
+    }    
+    if (!isStrongPassword(formData.password)) {
+      setErrorMessage("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.");
+      return;
     }
     setIsLoading(true);
 
@@ -28,13 +32,13 @@ export default function SignUp() {
       const response = await axios.post(
         "http://localhost:9090/moaaz/api/modernhome/users/register",
         {
-          username: formData.username,
+          name: formData.username,
           email: formData.email,
           password: formData.password,
         }
       );
 
-      if (response.status === 200) {
+      if (response.status === 200){
         alert("Sign-up successful");
         console.log("Form data submitted:", formData);
         setFormData({
@@ -63,7 +67,10 @@ export default function SignUp() {
       [name]: value,
     });
   };
-
+  const isStrongPassword = (password) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(password);
+  };
   return (
     <div className="container">
       <form onSubmit={handleSubmit}>

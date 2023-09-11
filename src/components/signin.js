@@ -39,7 +39,7 @@ export default function SignIn() {
       }
     } catch (error) {
       console.error("Error:", error);
-      console.log("Response data:", error.response.data);
+      console.log("Response data:", error.response?error.response.data:"" );
       alert("An error occurred. Please try again later.");
     } finally {
       setIsLoading(false);
