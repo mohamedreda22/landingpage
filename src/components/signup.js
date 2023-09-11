@@ -4,46 +4,57 @@ import React, { useState } from "react";
 import facebookicon from "../assets/facebookicon.png";
 import gmailicon from "../assets/gmailicon.png";
 import { Link } from "react-router-dom";
-
-export default function SignIn() {
+import axios from "axios";
+export default function SignUp() {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
- if (!formData.username || !formData.email || !formData.password) {
-      alert("Please fill in all fields before signing up.");
-      return;
+    if (!formData.username || !formData.email || !formData.password) {
+      setErrorMessage("Please fill in all fields before signing up."); 
+            return;
     }
-    try {
-      const response = await fetch('localhost:9090/moaaz/api/modernhome/users/register', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+    setIsLoading(true);
 
-      if (response.ok) {
+    try {
+      const response = await axios.post(
+        "http://localhost:9090/moaaz/api/modernhome/users/register",
+        {
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+        }
+      );
+
+      if (response.status === 200) {
         alert("Sign-up successful");
         console.log("Form data submitted:", formData);
         setFormData({
+          username: "", 
           email: "",
           password: "",
         });
+        setErrorMessage(""); 
       } else {
-        alert("Invalid email or password. Please try again.");
+        setErrorMessage("Invalid email or password. Please try again."); 
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("An error occurred. Please try again later.");
+      console.log("Response data:", error.response.data);
+      setErrorMessage("An error occurred. Please try again later."); 
+    }
+    finally {
+      setIsLoading(false);
     }
   };
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -57,7 +68,7 @@ export default function SignIn() {
     <div className="container">
       <form onSubmit={handleSubmit}>
         <h1>Sign Up</h1>
-        <div>
+          <div>
           <input
             type="text"
             id="username"
@@ -83,7 +94,7 @@ export default function SignIn() {
           value={formData.password}
           onChange={handleChange}
         />
-        <h4 >Or Sign up with </h4>
+        <h4>Or Sign up with </h4>
         <div className="social-container">
           <a href="/" className="social">
             <img src={facebookicon} alt="facebook" />
@@ -93,12 +104,16 @@ export default function SignIn() {
           </a>
         </div>
         <div>
-          <button  type="submit">Sign Up</button>
+          <button type="submit"
+          disabled={isLoading}
+          > 
+          {isLoading ? 'Signing up...' : 'Sign Up'}
+          </button>
         </div>
+        {errorMessage && <div className="error">{errorMessage}</div>}
         <div>
           <h4>
-            Have one? .... 
-            <Link to="/signin">Sign In</Link>
+            Have one? .... <Link to="/signin">Sign In</Link>
           </h4>
         </div>
       </form>

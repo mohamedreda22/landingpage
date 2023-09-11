@@ -1,47 +1,48 @@
 import logointro from "../assets/logointro.png";
 import "../styles/signIn.css";
-import React from "react";
+import React, { useState } from "react";
 import facebookicon from "../assets/facebookicon.png";
 import gmailicon from "../assets/gmailicon.png";
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
 export default function SignIn() {  
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.email || !formData.password) {
-      alert("Please fill in both fields.");
+      setError("Please fill in both fields.");
       return;
     }
+    setIsLoading(true);
 
     try {
-      const response = await fetch('localhost:9090/moaaz/api/modernhome/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
+      const response = await axios.post(`http://localhost:9090/moaaz/api/modernhome/auth/login?email=${formData.email}&password=${formData.password}`);
+      console.log("Response:", response );
+      if (response&&response.status === 202) {
         alert("Sign-in successful");
-        console.log("Form data submitted:", formData);
+        console.log("Form data submitted:", response.data);
         setFormData({
           email: "",
           password: "",
         });
-        return response.json();
       } else {
-        alert("Invalid email or password. Please try again.");
+        alert("Sign-in unsuccessful");
+        console.log("Response data:", response.data);
       }
     } catch (error) {
       console.error("Error:", error);
+      console.log("Response data:", error.response.data);
       alert("An error occurred. Please try again later.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -69,13 +70,13 @@ export default function SignIn() {
 
         <div>
           <input  
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Username"
-          value={formData.email}
-          onChange={handleChange}
-              />
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+          />
         </div>
         <input 
           type="password"
@@ -84,19 +85,24 @@ export default function SignIn() {
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
-           />
+        />
         <div>
-          <button type="submit">Sign In</button>
+          <button 
+            type="submit"
+            disabled={isLoading}
+          >
+            {isLoading ? 'Signing in...' : 'Sign In'}
+          </button>
         </div>
+        {error && <div className="error">{error}</div>}
         <div>
-            <h4>New one ?  .... 
-              <Link  to="/signup">Sign Up</Link>
-              </h4>
-    
+          <h4>
+            New one ?  .... 
+            <Link to="/signup">Sign Up</Link>
+          </h4>
         </div>
       </form>
       <img src={logointro} alt="logo" className="img" />
-
     </div>
   );
 }
